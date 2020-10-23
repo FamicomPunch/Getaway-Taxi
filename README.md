@@ -1,2 +1,2 @@
 # ScoreSpaceJam
-Our Spcore Sapce Jam Game!
+Our Score Space Jam Game!
