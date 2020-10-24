@@ -9,6 +9,7 @@ public class CarSpawnManager : MonoBehaviour
     public GameObject[] spawns;
     public enum spawnDir { North, East, South, West };
     public spawnDir Direction;
+    public bool gameRunning;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,8 @@ public class CarSpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!gameRunning)
+            gameRunning = true; //TEMPORARY!!
     }
 
     public int facingDirection() //Not used yet
