@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
-    public enum spawnDir { North, East, South, West };
-    public spawnDir Direction;
     public float speed;
+    protected GameManager.spawnDir Direction;
     
     // Start is called before the first frame update
     void Start()
     {
+        Direction = GameObject.Find("GameManager").GetComponent<GameManager>().Direction;
         Destroy(gameObject, 3);
     }
 
@@ -20,21 +20,21 @@ public class CarMovement : MonoBehaviour
         gameObject.transform.position += movement(Direction);
     }
 
-    protected Vector3 movement(spawnDir Direction)
-    { switch ((int)Direction) {
-            case 0: // North
+    protected Vector3 movement(GameManager.spawnDir Direction)
+    { switch (Direction) {
+            case GameManager.spawnDir.North: // North
                 {
                     return Vector3.down * Time.deltaTime * speed;
                 }
-            case 1: // East
+            case GameManager.spawnDir.East: // East
                 {
                     return Vector3.left * Time.deltaTime * speed;
                 }
-            case 2: // South
+            case GameManager.spawnDir.South: // South
                 {
                     return Vector3.up * Time.deltaTime * speed;
                 }
-            case 3: // West
+            case GameManager.spawnDir.West: // West
                 {
                     return Vector3.right * Time.deltaTime * speed;
                 }

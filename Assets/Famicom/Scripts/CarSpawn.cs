@@ -5,18 +5,18 @@ using System.Linq;
 
 public class CarSpawn : MonoBehaviour
 {
+    private GameManager gameManager;
     List <GameObject> cars, trucks, police;
     public float timerMin, timerMax, timeRemaining;
     public bool isActive;
     public GameObject manager;
     Quaternion carRotation = Quaternion.LookRotation(Vector3.forward, Vector3.down);
-    public enum spawnDir { North, East, South, West };
-    public spawnDir Direction;
     int numCars, numTrucks, numPolice;
-
+    public bool forcePolice;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         cars = Resources.LoadAll<GameObject>("CarPrefabs/Cars").ToList();
         trucks = Resources.LoadAll<GameObject>("CarPrefabs/Trucks").ToList();
         police = Resources.LoadAll<GameObject>("CarPrefabs/Police").ToList();
@@ -35,8 +35,8 @@ public class CarSpawn : MonoBehaviour
             if (timeRemaining <= 0)
             {
                 GameObject car;
-                Vector3 impreciseSpawn = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
-                if(Random.value >= 0.9f && !manager.GetComponent<CarSpawnManager>().policeSpawn)
+                Vector3 impreciseSpawn = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+                if(forcePolice || Random.value >= 0.9f && !manager.GetComponent<CarSpawnManager>().policeSpawn)
                 {
                     car = Instantiate(police[Random.Range(0, numPolice)], transform.position + impreciseSpawn, carRotation);
                     manager.GetComponent<CarSpawnManager>().police = car;
@@ -45,8 +45,7 @@ public class CarSpawn : MonoBehaviour
                     car = Instantiate(trucks[Random.Range(0, numTrucks)], transform.position + impreciseSpawn, carRotation);
                 else
                     car = Instantiate(cars[Random.Range(0, numCars)], transform.position + impreciseSpawn, carRotation);
-                car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (int)Direction));
-                car.GetComponent<CarMovement>().Direction = (CarMovement.spawnDir)Direction;
+                car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (1+(int)gameManager.Direction)));
                 car.GetComponent<CarMovement>().speed = Random.Range(3, 10);
                 timeRemaining = Random.Range(timerMin, timerMax);
             }
@@ -60,7 +59,6 @@ public class CarSpawn : MonoBehaviour
     public void rotationSystem(bool clockwise, int Dir)
     {
         transform.RotateAround(manager.transform.position, Vector3.forward, 90 * (clockwise ? -1:1));
-        Direction = (spawnDir)Dir;
     }
 
     public void externalTimerSet(float min, float max)

@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class CarSpawnManager : MonoBehaviour
 {
+    private GameManager gameManager;
+    GameManager.spawnDir Direction;
     public GameObject spawner;
-    public int highwayLanes = 5;
+    public int highwayLanes = 6;
     public GameObject[] spawns;
-    public enum spawnDir { North, East, South, West };
-    public spawnDir Direction;
     public bool gameRunning, policeSpawn;
     public GameObject police;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawns = new GameObject[highwayLanes];
         for (int i = 0; i < highwayLanes; i++)
         {
-            spawns[i] = Instantiate(spawner, new Vector3(-6 + (3 * i), 10, 0), Quaternion.LookRotation(Vector3.down, Vector3.back));
+            spawns[i] = Instantiate(spawner, new Vector3(10,-2.5f + i, 0), Quaternion.LookRotation(Vector3.left, Vector3.back));
             spawns[i].GetComponent<CarSpawn>().externalTimerSet(((float)i + 0.5f), ((float)i + 1.5f));
             spawns[i].GetComponent<CarSpawn>().manager = gameObject;
-            spawns[i].GetComponent<CarSpawn>().Direction = CarSpawn.spawnDir.North;
         }
-        Direction = spawnDir.North;
-        Debug.Log(spawns.Length);
+        Direction = GameManager.spawnDir.East;
         gameRunning = true;
     }
 
@@ -35,29 +34,18 @@ public class CarSpawnManager : MonoBehaviour
             policeSpawn = true;
         else
             policeSpawn = false;
+
+        if (gameManager.isRotating)
+            rotateSpawn(gameManager.rotatingClockwise);
     }
 
-    public int facingDirection() //Not used yet
+    int facingDirection() //Not used yet
     {
         return (int)Direction;
     }
 
     public void rotateSpawn(bool clockwise) //Rotating the map clockwise?
     {
-
-        if (clockwise)
-        {
-            if (Direction.Equals(spawnDir.West))
-                Direction = spawnDir.North;
-            else Direction++;            
-        }
-        else
-        {
-            if (Direction.Equals(spawnDir.North))
-                Direction = spawnDir.West;
-            else Direction--;
-        }
-
         for (int i = 0; i < highwayLanes; i++)
         {
             spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise,(int)Direction);
