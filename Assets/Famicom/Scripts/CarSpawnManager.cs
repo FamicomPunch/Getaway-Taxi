@@ -9,7 +9,8 @@ public class CarSpawnManager : MonoBehaviour
     public GameObject[] spawns;
     public enum spawnDir { North, East, South, West };
     public spawnDir Direction;
-    public bool gameRunning;
+    public bool gameRunning, policeSpawn;
+    public GameObject police;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +25,16 @@ public class CarSpawnManager : MonoBehaviour
         }
         Direction = spawnDir.North;
         Debug.Log(spawns.Length);
+        gameRunning = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameRunning)
-            gameRunning = true; //TEMPORARY!!
+        if (police)
+            policeSpawn = true;
+        else
+            policeSpawn = false;
     }
 
     public int facingDirection() //Not used yet

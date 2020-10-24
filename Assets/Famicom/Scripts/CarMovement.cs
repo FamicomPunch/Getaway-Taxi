@@ -17,30 +17,30 @@ public class CarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch ((int)Direction) {
+        gameObject.transform.position += movement(Direction);
+    }
+
+    protected Vector3 movement(spawnDir Direction)
+    { switch ((int)Direction) {
             case 0: // North
                 {
-                    gameObject.transform.position += Vector3.down * Time.deltaTime * speed;
-                    break;
+                    return Vector3.down * Time.deltaTime * speed;
                 }
             case 1: // East
                 {
-                    gameObject.transform.position += Vector3.left * Time.deltaTime * speed;
-                    break;
+                    return Vector3.left * Time.deltaTime * speed;
                 }
             case 2: // South
                 {
-                    gameObject.transform.position += Vector3.up * Time.deltaTime * speed;
-                    break;
+                    return Vector3.up * Time.deltaTime * speed;
                 }
             case 3: // West
                 {
-                    gameObject.transform.position += Vector3.right * Time.deltaTime * speed;
-                    break;
+                    return Vector3.right * Time.deltaTime * speed;
                 }
             default:
                 Debug.Log("???");
-                break;
+                return Vector3.down * Time.deltaTime * speed * 50;
         }
     }
 }

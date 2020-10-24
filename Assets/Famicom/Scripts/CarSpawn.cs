@@ -5,23 +5,24 @@ using System.Linq;
 
 public class CarSpawn : MonoBehaviour
 {
-    public List <GameObject> cars, trucks;
-    public GameObject spawnVehicle;
+    List <GameObject> cars, trucks, police;
     public float timerMin, timerMax, timeRemaining;
     public bool isActive;
     public GameObject manager;
     Quaternion carRotation = Quaternion.LookRotation(Vector3.forward, Vector3.down);
     public enum spawnDir { North, East, South, West };
     public spawnDir Direction;
-    int numCars, numTrucks;
+    int numCars, numTrucks, numPolice;
 
     // Start is called before the first frame update
     void Start()
     {
         cars = Resources.LoadAll<GameObject>("CarPrefabs/Cars").ToList();
         trucks = Resources.LoadAll<GameObject>("CarPrefabs/Trucks").ToList();
+        police = Resources.LoadAll<GameObject>("CarPrefabs/Police").ToList();
         numCars = cars.Count;
         numTrucks = trucks.Count;
+        numPolice = police.Count;
         timeRemaining = timerMax;
     }
 
@@ -35,7 +36,12 @@ public class CarSpawn : MonoBehaviour
             {
                 GameObject car;
                 Vector3 impreciseSpawn = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
-                if(Random.value > 0.75f)
+                if(Random.value >= 0.9f && !manager.GetComponent<CarSpawnManager>().policeSpawn)
+                {
+                    car = Instantiate(police[Random.Range(0, numPolice)], transform.position + impreciseSpawn, carRotation);
+                    manager.GetComponent<CarSpawnManager>().police = car;
+                }
+                else if(Random.value >= 0.75f)
                     car = Instantiate(trucks[Random.Range(0, numTrucks)], transform.position + impreciseSpawn, carRotation);
                 else
                     car = Instantiate(cars[Random.Range(0, numCars)], transform.position + impreciseSpawn, carRotation);
