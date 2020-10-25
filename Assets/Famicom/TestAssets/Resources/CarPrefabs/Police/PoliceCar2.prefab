@@ -217,6 +217,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   player: {fileID: 4482679064057553052, guid: 4c96765756bba1b44806292b9d189e82, type: 3}
+  test: 0
+  lightSwap: 10
+  lightIntensity: 8
 --- !u!1 &7120060978855862417
 GameObject:
   m_ObjectHideFlags: 0

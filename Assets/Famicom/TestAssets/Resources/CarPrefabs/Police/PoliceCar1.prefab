@@ -44,7 +44,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 179
   m_InnerSpotAngle: 7.8
   m_CookieSize: 10
@@ -217,6 +217,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   player: {fileID: 4482679064057553052, guid: 4c96765756bba1b44806292b9d189e82, type: 3}
+  test: 0
+  lightSwap: 10
+  lightIntensity: 8
 --- !u!1 &5611608350635252443
 GameObject:
   m_ObjectHideFlags: 0

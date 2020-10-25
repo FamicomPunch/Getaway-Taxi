@@ -8,7 +8,7 @@ public class PoliceMovement : CarMovement
     public bool test;
     bool leftLight, rightLight;
     Light[] lightList;
-    public float lightSwap = 10f;
+    public float lightSwap = 10f, lightIntensity = 8f;
     float lightTimer;
 
     // Start is called before the first frame update
@@ -27,32 +27,23 @@ public class PoliceMovement : CarMovement
         Debug.Log(lightList[1].intensity);
         leftLight = Random.value > 0.5f ? true:false;
         rightLight = !leftLight;
-        Debug.Log("Left: " + leftLight+ " Right " + rightLight);
-        //Debug.Break();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //gameObject.transform.position += movement(Direction) + moveToPlayer(player) * Time.deltaTime;
-        lightList[0].intensity += Time.deltaTime * (leftLight ? 5 * lightSwap : 5 * -lightSwap);
-        if (lightList[0].intensity >= 5f)
+        gameObject.transform.position += movement(Direction) + moveToPlayer(player) * Time.deltaTime;
+        lightList[0].intensity += Time.deltaTime * (leftLight ? lightIntensity * lightSwap : lightIntensity * -lightSwap);
+        if (lightList[0].intensity >= lightIntensity)
             leftLight = false;
         else if (lightList[0].intensity == 0)
             leftLight = true;
-        lightList[1].intensity += Time.deltaTime * (rightLight ? 5 * lightSwap : 5 * -lightSwap);
-        if (lightList[1].intensity >= 5f)
+        lightList[1].intensity += Time.deltaTime * (rightLight ? lightIntensity * lightSwap : lightIntensity * -lightSwap);
+        if (lightList[1].intensity >= lightIntensity)
             rightLight = false;
         else if (lightList[1].intensity == 0)
             rightLight = true;
-        //lightSwap -= Time.deltaTime;
-        //if(lightTimer <= 0)
-        //{
-        //    leftLight = !leftLight;
-        //    rightLight = !rightLight;
-        //    lightTimer = 1.0f/lightSwap;
-        //}
         if (test)
             gameObject.transform.position = Vector3.zero;
     }
