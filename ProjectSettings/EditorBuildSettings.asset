@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/rshimoda/Scenes/Menu.unity
+    guid: 4ea439066dd9bd74b85db1223c7f9dab
+  - enabled: 1
+    path: Assets/rshimoda/Scenes/Game.unity
+    guid: 1d852010108243c429b6f25d414e6857
+  - enabled: 1
     path: Assets/Famicom/Main Menu.unity
     guid: 133611da32db26c42aeaaa4e90b93c9b
   - enabled: 1

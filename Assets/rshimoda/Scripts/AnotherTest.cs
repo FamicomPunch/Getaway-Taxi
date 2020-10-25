@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class AnotherTest : MonoBehaviour
 {
-    public static UserData CurrentUser;
-    public static int State;
     // Start is called before the first frame update
     void Start()
     {
