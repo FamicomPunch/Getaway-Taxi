@@ -5,8 +5,10 @@ using UnityEngine;
 public class PoliceMovement : CarMovement
 {
     public GameObject player;
-    bool leftLightDim;
+    public bool test;
+    bool leftLight, rightLight;
     Light[] lightList;
+    float lightSwap;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +19,30 @@ public class PoliceMovement : CarMovement
         player = GameObject.Find("Player");
 
         lightList = gameObject.GetComponentsInChildren<Light>();
-        lightList[0].intensity = Random.value;
+        lightList[0].intensity = Random.Range(0,1f);
+        lightSwap = lightList[0].intensity/5;
         lightList[1].intensity = 1f - lightList[0].intensity;
-        leftLightDim = (Random.value > 0.5f) ? true : false;
+        Debug.Log(lightList[0].intensity);
+        Debug.Log(lightList[1].intensity);
+        leftLight = true;
+        rightLight = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         gameObject.transform.position += movement(Direction) + moveToPlayer(player) * Time.deltaTime;
-        lightList[0].intensity += Time.fixedDeltaTime * (leftLightDim ? -1 : 1);
-        lightList[1].intensity += Time.fixedDeltaTime * (leftLightDim ? 1 : -1);
-        leftLightDim = (lightList[0].intensity > 1 || lightList[0].intensity < 0) ? !leftLightDim : leftLightDim;
+        lightList[0].intensity += Time.deltaTime * (leftLight ? -5 : 5);
+        lightList[1].intensity += Time.deltaTime * (rightLight ? -5 : 5);
+        lightSwap -= Time.deltaTime;
+        if(lightSwap <= 0)
+        {
+            leftLight = !leftLight;
+            rightLight = !rightLight;
+            lightSwap = 0.20f;
+        }
+        if (test)
+            gameObject.transform.position = Vector3.zero;
     }
 
     Vector3 moveToPlayer(GameObject player)
