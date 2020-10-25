@@ -41,12 +41,12 @@ public class CarSpawn : MonoBehaviour
                     car = Instantiate(police[Random.Range(0, numPolice)], transform.position + impreciseSpawn, carRotation);
                     manager.GetComponent<CarSpawnManager>().police = car;
                 }
-                else if(Random.value >= 0.75f)
+                else if(Random.value >= 0.60f)
                     car = Instantiate(trucks[Random.Range(0, numTrucks)], transform.position + impreciseSpawn, carRotation);
                 else
                     car = Instantiate(cars[Random.Range(0, numCars)], transform.position + impreciseSpawn, carRotation);
                 car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (1+(int)gameManager.Direction)));
-                car.GetComponent<CarMovement>().speed = Random.Range(3, 10);
+                //car.GetComponent<CarMovement>().speed = Random.Range(3, 10);
                 timeRemaining = Random.Range(timerMin, timerMax);
             }
         }

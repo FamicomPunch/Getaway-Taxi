@@ -23,7 +23,9 @@ public class CarMovement : MonoBehaviour
     }
 
     protected Vector3 movement(GameManager.spawnDir Direction)
-    { switch (Direction) {
+    {
+        speed = manager.speed;
+        switch (Direction) {
             case GameManager.spawnDir.North: // North
                 {
                     if (gameObject.transform.position.y < -18)
