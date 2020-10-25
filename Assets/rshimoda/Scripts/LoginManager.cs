@@ -13,7 +13,6 @@ using UnityEngine.SceneManagement;
 public class LoginManager : MonoBehaviour
 {
     public InputField usernameTxt;
-    public InputField passwordTxt;
     public Text gameTitleLbl;
     public Text errorLbl;
     private string urlBase;
@@ -25,7 +24,7 @@ public class LoginManager : MonoBehaviour
         gameTitleLbl.text = ScoringManager.Instance.gameTitle;
     }
     public void OnRegisterBtn(){
-        if(string.IsNullOrWhiteSpace(usernameTxt.text) || string.IsNullOrWhiteSpace(passwordTxt.text)){
+        if(string.IsNullOrWhiteSpace(usernameTxt.text)){
             errorLbl.text = "Please fill in register information";
             return;
         }
@@ -34,8 +33,7 @@ public class LoginManager : MonoBehaviour
     }
     public IEnumerator PostRegister(){
         var requestBody = new LoginRequest(){
-            Username = usernameTxt.text.Trim(),
-            Password = passwordTxt.text.Trim()
+            Username = usernameTxt.text.Trim()
         };
         var postData = JsonUtility.ToJson(requestBody);
         using (UnityWebRequest www = UnityWebRequest.Put(urlBase + "BTUsrMgm", postData))
@@ -58,8 +56,8 @@ public class LoginManager : MonoBehaviour
 
     }
     public void OnLoginBtn(){
-        if(string.IsNullOrWhiteSpace(usernameTxt.text) || string.IsNullOrWhiteSpace(passwordTxt.text)){
-            errorLbl.text = "Please fill in login information";
+        if(string.IsNullOrWhiteSpace(usernameTxt.text)){
+            errorLbl.text = "Please fill in your DriverID";
             return;
         }
         errorLbl.text = string.Empty;
@@ -68,8 +66,7 @@ public class LoginManager : MonoBehaviour
     public IEnumerator PostLogin(){
 
         var requestBody = new LoginRequest(){
-            Username = usernameTxt.text,
-            Password = passwordTxt.text
+            Username = usernameTxt.text
         };
         var postData = JsonUtility.ToJson(requestBody);
         Debug.Log(urlBase + "BTLogin");
@@ -98,13 +95,13 @@ public class LoginManager : MonoBehaviour
             errorLbl.text = srvError.error;
         }
         else{
-            ScoringManager.Instance.currentUser = JsonUtility.FromJson<UserData>(returnString);
+            Debug.Log(returnString);
+            ScoringManager.Instance.currentPlayer = JsonUtility.FromJson<UserData>(returnString);
             /*
              * Goes to the game scene
              */
             SceneManager.LoadScene(gameScene);
         }
         usernameTxt.text = string.Empty;
-        passwordTxt.text = string.Empty;
     }
 }

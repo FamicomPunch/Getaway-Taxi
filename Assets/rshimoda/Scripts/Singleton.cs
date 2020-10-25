@@ -25,10 +25,13 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 return null;
             }
  
+            Debug.Log("Getting Singleton");
             lock (m_Lock)
             {
+                Debug.Log("After Locking");
                 if (m_Instance == null)
                 {
+                    Debug.Log("Creating for the first time");
                     // Search for existing instance.
                     m_Instance = (T)FindObjectOfType(typeof(T));
  
@@ -40,25 +43,26 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                         m_Instance = singletonObject.AddComponent<T>();
                         singletonObject.name = typeof(T).ToString() + " (Singleton)";
  
-                        // Make instance persistent.
+                        Debug.Log("Make instance persistent.");
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
- 
-                return m_Instance;
             }
+            return m_Instance;
         }
     }
  
  
     private void OnApplicationQuit()
     {
+        Debug.Log("this singleton is going down");
         m_ShuttingDown = true;
     }
  
  
     private void OnDestroy()
     {
+        Debug.Log("this singleton is going down - da revenge");
         m_ShuttingDown = true;
     }
 }
