@@ -128,6 +128,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1591243376}
     m_Modifications:
+    - target: {fileID: 4327905488318536080, guid: 1a3df31069719d144be39e9f801f34b4,
+        type: 3}
+      propertyPath: usernameTxt
+      value: 
+      objectReference: {fileID: 5746904}
+    - target: {fileID: 4327905488318536080, guid: 1a3df31069719d144be39e9f801f34b4,
+        type: 3}
+      propertyPath: passwordTxt
+      value: 
+      objectReference: {fileID: 5746903}
+    - target: {fileID: 4327905488318536080, guid: 1a3df31069719d144be39e9f801f34b4,
+        type: 3}
+      propertyPath: gameTitleLbl
+      value: 
+      objectReference: {fileID: 5746902}
+    - target: {fileID: 4327905488318536080, guid: 1a3df31069719d144be39e9f801f34b4,
+        type: 3}
+      propertyPath: errorLbl
+      value: 
+      objectReference: {fileID: 5746901}
     - target: {fileID: 4327905488318536108, guid: 1a3df31069719d144be39e9f801f34b4,
         type: 3}
       propertyPath: m_Name
@@ -245,41 +265,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a3df31069719d144be39e9f801f34b4, type: 3}
---- !u!1 &33852775
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!114 &5746901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4327905488386654338, guid: 1a3df31069719d144be39e9f801f34b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5746900}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 33852776}
-  m_Layer: 5
-  m_Name: Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &33852776
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5746902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4327905489596347350, guid: 1a3df31069719d144be39e9f801f34b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5746900}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33852775}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1591243376}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5746903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4327905488884111401, guid: 1a3df31069719d144be39e9f801f34b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5746900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5746904 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4327905488658693106, guid: 1a3df31069719d144be39e9f801f34b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5746900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &550641773
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +341,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591243376}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -417,7 +450,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -482,8 +515,9 @@ GameObject:
   - component: {fileID: 1591243375}
   - component: {fileID: 1591243374}
   - component: {fileID: 1591243373}
+  - component: {fileID: 1591243377}
   m_Layer: 5
-  m_Name: ----UIManager----
+  m_Name: ----ScoringManager----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,7 +595,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1297126890}
-  - {fileID: 33852776}
   - {fileID: 550641774}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -571,3 +604,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1591243377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591243372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1474705bfe0e3c4eae2d06a1d8879e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUser:
+    user_id: 
+    password: 
+    top_score: 0
+    top_time: 0
+    total_matches: 0
+    session_tk: 
+    login_date: 
+    start: 
+    attempts: 0
+    plays: []
+  gameTitle: Getaway Taxi
+  gameScene: Game
+  urlBase: https://rdifbvxni2.execute-api.us-east-1.amazonaws.com/default/
