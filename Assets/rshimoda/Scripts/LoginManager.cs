@@ -55,6 +55,10 @@ public class LoginManager : MonoBehaviour
         }
 
     }
+    public void OnQuitBtn(){
+        Debug.Log("Quitting");
+        Application.Quit();
+    }
     public void OnLoginBtn(){
         if(string.IsNullOrWhiteSpace(usernameTxt.text)){
             errorLbl.text = "Please fill in your DriverID";
@@ -69,7 +73,6 @@ public class LoginManager : MonoBehaviour
             Username = usernameTxt.text
         };
         var postData = JsonUtility.ToJson(requestBody);
-        Debug.Log(urlBase + "BTLogin");
         using (UnityWebRequest www = UnityWebRequest.Put(urlBase + "BTLogin", postData))
         {
             www.method = UnityWebRequest.kHttpVerbPOST;
@@ -95,7 +98,6 @@ public class LoginManager : MonoBehaviour
             errorLbl.text = srvError.error;
         }
         else{
-            Debug.Log(returnString);
             ScoringManager.Instance.currentPlayer = JsonUtility.FromJson<UserData>(returnString);
             /*
              * Goes to the game scene
