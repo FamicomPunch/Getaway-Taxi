@@ -26,8 +26,12 @@ public class TileManager : MonoBehaviour
         newHighwayTiles = new GameObject[5];
         for(int i = 0; i < newHighwayTiles.Length; i++)
         {
-            newHighwayTiles[i] = Resources.Load<GameObject>("Road/RoadPiece");
+            newHighwayTiles[i] = Resources.Load<GameObject>("Prefabs/RoadPiece");
         }
+
+        roadPiece[0] = Resources.Load<GameObject>("Prefabs/RoadPiece");
+        roadPiece[1] = Resources.Load<GameObject>("Prefabs/LeftRampRoadPiece");
+        roadPiece[2] = Resources.Load<GameObject>("Prefabs/RightRampRoadPiece");
         //playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         //for(int i = 0; i < TileAmnt; i++)
