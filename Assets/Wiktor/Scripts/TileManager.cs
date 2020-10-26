@@ -43,7 +43,7 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lastTile.name);
+        //Debug.Log(lastTile.name);
     }
 
     public void SpawnTile(GameManager.spawnDir spawnDir, int index = -1)

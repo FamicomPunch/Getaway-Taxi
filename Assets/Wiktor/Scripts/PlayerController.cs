@@ -84,7 +84,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (gm.gameOverTrigger)
+        { rb.MovePosition(rb.position + gm.dirVectors[(int)gm.moveDir] * gm.speed * Time.fixedDeltaTime * 4); }
+        else
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
     
     private void setSpeed(bool xAxis, bool inverse)

@@ -33,10 +33,10 @@ public class RoadMovement : MonoBehaviour
         if (isRampTile && gameManager.hasShift)
         {
             //Debug.Break();
-            Debug.Log("New dir: "+Dir);
+            //Debug.Log("New dir: "+Dir);
         }
 
-        if (isRampTile && !gameManager.hasShift)
+        if (isRampTile && !gameManager.hasShift && !gameManager.gameOverTrigger)
         {
             if(Dir.Equals(GameManager.spawnDir.East)||Dir.Equals(GameManager.spawnDir.West))
             {
@@ -49,7 +49,7 @@ public class RoadMovement : MonoBehaviour
             {
                 gameManager.rampCentered(Vector3.zero - pos);
             }
-            Debug.Log("Old dir: " + Dir);
+            //Debug.Log("Old dir: " + Dir);
         }
 
         Vector3 moveDir;

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float defaultSpeed = 5f;
     public int tileAmnt = 3;
     public enum spawnDir { East, South, West, North, Rotate };
-    public Vector3[] dirVectors = { Vector2.right, Vector2.down, Vector2.left, Vector2.up };
+    public Vector2[] dirVectors = { Vector2.right, Vector2.down, Vector2.left, Vector2.up };
     public Vector3 tempAddValue = Vector3.zero;
     public spawnDir Direction = spawnDir.East, moveDir = spawnDir.East;
     public spawnDir nextDirection, oldDirection = spawnDir.East;
@@ -145,6 +145,10 @@ public class GameManager : MonoBehaviour
     public void GameOverActive()
     {
         gameOverTrigger = true;
+        if (GameObject.Find("LeftRampRoadPiece(Clone)"))
+            GameObject.Find("LeftRampRoadPiece(Clone)").GetComponent<Ramp>().enabled = false;
+        else if (GameObject.Find("RightRampRoadPiece(Clone)"))
+            GameObject.Find("RightRampRoadPiece(Clone)").GetComponent<Ramp>().enabled = false;
     }
 
     public void EndRound()

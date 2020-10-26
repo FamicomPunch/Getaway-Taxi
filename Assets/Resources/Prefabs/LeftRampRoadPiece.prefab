@@ -563,6 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 738521569454366046}
   - component: {fileID: 7754241575225231813}
+  - component: {fileID: 2387313371506202189}
   m_Layer: 8
   m_Name: GameOverCollider
   m_TagString: GameOver
@@ -594,7 +595,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -610,6 +611,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &2387313371506202189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496642907059333650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57be9a1af9a82f4c989aa24247039df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748166928155220241
 GameObject:
   m_ObjectHideFlags: 0
