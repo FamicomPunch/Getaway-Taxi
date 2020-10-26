@@ -91,6 +91,9 @@ public class GameManager : MonoBehaviour
             isRotating = !isRotating;
         }
 
+        if (speed > defaultSpeed * 2)
+            GameOverActive();
+
     }
 
     void startTurnIndicator(bool turnLeft, spawnDir currDirection)
