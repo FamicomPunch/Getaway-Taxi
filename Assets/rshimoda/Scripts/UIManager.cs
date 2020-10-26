@@ -110,4 +110,12 @@ public class UIManager : MonoBehaviour
     public void OnTryAgainBtn(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void OnQuitBtn(){
+        Application.Quit();
+    }
+
+    public void OnMainMenuBtn(){
+        SceneManager.LoadScene("Menu");
+    }
 }
