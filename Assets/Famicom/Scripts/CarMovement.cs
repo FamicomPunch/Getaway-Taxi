@@ -57,4 +57,12 @@ public class CarMovement : MonoBehaviour
                 return Vector3.down * Time.deltaTime * speed * 50;
         }
     }
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            manager.GameOverActive();
+        }
+    }
 }

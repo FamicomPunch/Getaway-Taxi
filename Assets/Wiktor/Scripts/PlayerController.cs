@@ -22,33 +22,35 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        Dir = gm.moveDir;
-        switch (Dir)
+        if (!gm.gameOverTrigger)
         {
-            case GameManager.spawnDir.East:
-                setSpeed(true, false);
-                forceRotation(-90);
-                break;
-            case GameManager.spawnDir.North:
-                setSpeed(false, false);
-                forceRotation(0);
-                break;
-            case GameManager.spawnDir.South:
-                setSpeed(false, true);
-                forceRotation(180);
-                break;
-            case GameManager.spawnDir.West:
-                setSpeed(true, true);
-                forceRotation(90);
-                break;
-            default:
-                Debug.Log("Broke Car Movement...");
-                Debug.Break();
-                return;
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+            Dir = gm.moveDir;
+            switch (Dir)
+            {
+                case GameManager.spawnDir.East:
+                    setSpeed(true, false);
+                    forceRotation(-90);
+                    break;
+                case GameManager.spawnDir.North:
+                    setSpeed(false, false);
+                    forceRotation(0);
+                    break;
+                case GameManager.spawnDir.South:
+                    setSpeed(false, true);
+                    forceRotation(180);
+                    break;
+                case GameManager.spawnDir.West:
+                    setSpeed(true, true);
+                    forceRotation(90);
+                    break;
+                default:
+                    Debug.Log("Broke Car Movement...");
+                    Debug.Break();
+                    return;
+            }
         }
-
 
         /*if (transform.position.x >= 1.50f)
         {
@@ -72,6 +74,12 @@ public class PlayerController : MonoBehaviour
         //q.SetFromToRotation(transform.rotation.eulerAngles, Vector3.left * Rotation);
         transform.rotation = Quaternion.Euler(Vector3.forward * Rotation);
         //transform.Rotate(Vector3.back, Rotation);
+    }
+
+    void OnBecameInvisible()
+    {
+        if (gm.gameOverTrigger)
+            gm.EndRound();
     }
 
     private void FixedUpdate()

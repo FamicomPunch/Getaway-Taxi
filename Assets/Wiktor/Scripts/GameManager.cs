@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent leftTurnEvent;
     private TileManager tileManager;
     private CarSpawnManager carSpawnManager;
+    private GameObject player;
 
     public float speed = 5f;
     public float defaultSpeed = 5f;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     public spawnDir nextDirection, oldDirection = spawnDir.East;
     public int tilesUntilTurn;
     private bool clearTurn = true, onRamp = false;
-    public bool isRotating = false, rotatingClockwise = false, hasShift = false, spawnCars = true;
+    public bool isRotating = false, rotatingClockwise = false, hasShift = false, spawnCars = true, gameOverTrigger = false;
     
 
     // Start is called before the first frame update
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         if(rightTurnEvent == null) rightTurnEvent = new UnityEvent();
         if(leftTurnEvent == null) leftTurnEvent = new UnityEvent();
 
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         {
             isRotating = !isRotating;
         }
+
     }
 
     void startTurnIndicator(bool turnLeft, spawnDir currDirection)
@@ -137,5 +140,16 @@ public class GameManager : MonoBehaviour
         isRotating = true;
         carSpawnManager.rotateSpawn(rotatingClockwise, Direction);
         //speed /= Mathf.Sqrt(2);
+    }
+
+    public void GameOverActive()
+    {
+        gameOverTrigger = true;
+    }
+
+    public void EndRound()
+    {
+        Debug.Break();
+        // Whatever game over is
     }
 }
