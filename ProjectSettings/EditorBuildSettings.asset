@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/rshimoda/Scenes/EndlessRoadTest.unity
-    guid: 2cf01ffffcf27bc40b63d8cbee5d68fd
+    path: Assets/Scenes/Menu.unity
+    guid: bae51547a31c5de4bbf3104b822aafe7
+  - enabled: 1
+    path: Assets/Scenes/EndlessRoadTest.unity
+    guid: 4a0e43032a24ec94ba50a8a35f8f86a0
   m_configObjects: {}

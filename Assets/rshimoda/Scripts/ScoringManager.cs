@@ -15,7 +15,7 @@ public class ScoringManager : Singleton<ScoringManager>
     private static int state;
     // Start is called before the first frame update
     public string gameTitle = "Getaway Taxi";
-    public string gameScene = "Game";
+    public string gameScene = "EndlessRoadTest";
     public string urlBase = "https://rdifbvxni2.execute-api.us-east-1.amazonaws.com/default/";
     private UserPlay latestPlay;
 

@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
     private float bonus;
     private int turns;
     private bool died = false;
+    private AudioSource bkgndMusic;
+    public AudioSource explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
         scoreTxt.text = "0";
         bonusTxt.text = "0";
         deadPanel.SetActive(false);
+        bkgndMusic = this.GetComponent<AudioSource>();
 
     }
 
@@ -78,6 +81,8 @@ public class UIManager : MonoBehaviour
             //deadPanel.setActive(true);
             speedoNeedleImg.rotation = Quaternion.Euler(0f,0f,90f);
             if(!died){
+                bkgndMusic.Stop();
+                explosion.Play();
                 died = true;
                 deadPanel.SetActive(true);
                 ScoringManager.Instance.UpdateScore(

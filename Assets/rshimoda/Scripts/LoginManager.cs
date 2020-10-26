@@ -21,7 +21,7 @@ public class LoginManager : MonoBehaviour
     void Start(){
         urlBase = ScoringManager.Instance.urlBase;
         gameScene = ScoringManager.Instance.gameScene;
-        gameTitleLbl.text = ScoringManager.Instance.gameTitle;
+        //gameTitleLbl.text = ScoringManager.Instance.gameTitle;
     }
     public void OnRegisterBtn(){
         if(string.IsNullOrWhiteSpace(usernameTxt.text)){
