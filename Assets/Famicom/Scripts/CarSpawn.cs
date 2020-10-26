@@ -57,9 +57,30 @@ public class CarSpawn : MonoBehaviour
         }
     }
 
-    public void rotationSystem(bool clockwise, int Dir)
+    public void rotationSystem(bool clockwise, int slot, GameManager.spawnDir dir)
     {
-        transform.RotateAround(manager.transform.position, Vector3.forward, 90 * (clockwise ? -1:1));
+        transform.Rotate(Vector3.forward, 90 * (clockwise ? -1:1));
+        Vector3 pos;
+        switch (dir)
+        {
+            case GameManager.spawnDir.North:
+                pos = new Vector3(slot * 0.85f - 2.15f, 10, 0);
+                break;
+            case GameManager.spawnDir.South:
+                pos = new Vector3(2.15f - slot * .85f, -10, 0);
+                break;
+            case GameManager.spawnDir.East:
+                pos = new Vector3(10, slot * 0.85f - 2.15f, 0);
+                break;
+            case GameManager.spawnDir.West:
+                pos = new Vector3(-10, 2.15f - slot * 0.85f, 0);
+                break;
+            default:
+                Debug.Log("Broken?");
+                Debug.Break();
+                return;
+        }
+        transform.position = pos;
     }
 
     public void externalTimerSet(float min, float max)

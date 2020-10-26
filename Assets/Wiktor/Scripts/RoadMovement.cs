@@ -7,7 +7,7 @@ public class RoadMovement : MonoBehaviour
     private GameManager gameManager;
     GameManager.spawnDir Dir;
     private TileManager tileManager;
-    public float moveSpeed = 1f;
+    public float moveSpeed;
     private bool isRampTile;
     Vector3 pos;
     public Vector3 tempAddSpeed;
@@ -20,6 +20,8 @@ public class RoadMovement : MonoBehaviour
         tileManager = GameObject.Find("TileManager").GetComponent<TileManager>();
         isRampTile = (gameObject.name.Equals("LeftRampRoadPiece(Clone)") || gameObject.name.Equals("RightRampRoadPiece(Clone)"));
         pos = gameObject.transform.position;
+        moveSpeed = gameManager.speed;
+        tempAddSpeed = gameManager.tempAddValue;
     }
 
     // Update is called once per frame
@@ -57,7 +59,8 @@ public class RoadMovement : MonoBehaviour
                 if (transform.position.x < -18f && !isRampTile || transform.position.x < -90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
-                    gameManager.tileAmnt -= 1;
+                    if(!isRampTile)
+                        gameManager.tileAmnt -= 1;
                     Destroy(gameObject);
                 }
                 break;
@@ -66,7 +69,8 @@ public class RoadMovement : MonoBehaviour
                 if (transform.position.y < -18f && !isRampTile || transform.position.y < -90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
-                    gameManager.tileAmnt -= 1;
+                    if (!isRampTile)
+                        gameManager.tileAmnt -= 1;
                     Destroy(gameObject);
                 }
                 break;
@@ -75,7 +79,8 @@ public class RoadMovement : MonoBehaviour
                 if (transform.position.y > 18f && !isRampTile || transform.position.y > 90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
-                    gameManager.tileAmnt -= 1;
+                    if (!isRampTile)
+                        gameManager.tileAmnt -= 1;
                     Destroy(gameObject);
                 }
                 break;
@@ -84,7 +89,8 @@ public class RoadMovement : MonoBehaviour
                 if (transform.position.x > 18f && !isRampTile || transform.position.x > 90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
-                    gameManager.tileAmnt -= 1;
+                    if (!isRampTile)
+                        gameManager.tileAmnt -= 1;
                     Destroy(gameObject);
                 }
                 break;

@@ -5,22 +5,26 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private TileManager tileManager;
+    private CarSpawnManager carSpawnManager;
 
     public float speed = 5f;
     public float defaultSpeed = 5f;
-    public int tileAmnt = 5;
+    public int tileAmnt = 3;
     public enum spawnDir { East, South, West, North, Rotate };
-    public Vector3[] dirVectors = { Vector2.left, Vector2.down, Vector2.right, Vector2.up };
+    public Vector3[] dirVectors = { Vector2.right, Vector2.down, Vector2.left, Vector2.up };
+    public Vector3 tempAddValue = Vector3.zero;
     public spawnDir Direction = spawnDir.East, moveDir = spawnDir.East;
     public spawnDir nextDirection, oldDirection = spawnDir.East;
     public int tilesUntilTurn;
     private bool clearTurn = true, onRamp = false;
     public bool isRotating = false, rotatingClockwise = false, hasShift = false, spawnCars = true;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         tileManager = GameObject.Find("TileManager").GetComponent<TileManager>();
+        carSpawnManager = GameObject.Find("SpawnManager").GetComponent<CarSpawnManager>();
         //speed = speed / 4;
         tilesUntilTurn = 5;
         Direction = spawnDir.East;
@@ -44,6 +48,7 @@ public class GameManager : MonoBehaviour
                     nextDirection = spawnDir.East;
                 else nextDirection = Direction + 1;
                 tileManager.SpawnTurnTile(Direction, false);
+                rotatingClockwise = true;
             }
             else
             {
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
                     nextDirection = spawnDir.North;
                 else nextDirection = Direction - 1;
                 tileManager.SpawnTurnTile(Direction, true);
+                rotatingClockwise = false;
             }
             Debug.Log("NextDir: "+nextDirection);
             //Debug.Break();
@@ -61,6 +67,7 @@ public class GameManager : MonoBehaviour
         else if(tilesUntilTurn == 0)
         {
             clearTurn = true;
+            tilesUntilTurn = 5;
         }
         if(isRotating)
         {
@@ -80,50 +87,44 @@ public class GameManager : MonoBehaviour
         //moveDir = spawnDir.Rotate;
         onRamp = true;
         spawnCars = false;
+        tempAddValue = dirVectors[(int)nextDirection] * speed / 10 * Time.deltaTime * ((int)nextDirection % 2 == 0 ? 1:-1);
         //speed *= Mathf.Sqrt(2);
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Vehicle");
         GameObject[] road = GameObject.FindGameObjectsWithTag("Road");
         foreach (GameObject a in cars)
-        { a.GetComponent<CarMovement>().tempAddSpeed = -dirVectors[(int)nextDirection] *speed/10* Time.deltaTime; }
+        { a.GetComponent<CarMovement>().tempAddSpeed = tempAddValue; }
         foreach (GameObject a in road)
-        { a.GetComponent<RoadMovement>().tempAddSpeed = -dirVectors[(int)nextDirection] * speed/10 * Time.deltaTime; }
+        { a.GetComponent<RoadMovement>().tempAddSpeed = tempAddValue; }
     }
 
     public void rampCentered(Vector3 shift)
     {
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Vehicle");
         GameObject[] road = GameObject.FindGameObjectsWithTag("Road");
+        tempAddValue = Vector3.zero;
         foreach(GameObject a in cars)
         {
-        //    a.transform.position += shift;
-            a.GetComponent<CarMovement>().tempAddSpeed = Vector3.zero;
+            a.transform.position += shift;
+            a.GetComponent<CarMovement>().tempAddSpeed = tempAddValue;
         }
         foreach(GameObject a in road)
         {
-            //a.transform.position += shift; 
-            a.GetComponent<RoadMovement>().tempAddSpeed = Vector3.zero;
+            a.transform.position += shift; 
+            a.GetComponent<RoadMovement>().tempAddSpeed = tempAddValue;
         }
         hasShift = true;
         moveDir = nextDirection;
-        Debug.Break();
+        //Debug.Break();
     }
 
     public void getOffRamp()
     {
+        Direction = nextDirection;
         moveDir = Direction;
         onRamp = hasShift = false;
         spawnCars = true;
-        //speed /= Mathf.Sqrt(2);
-    }
-
-    public void rotation(bool clockwise)
-    {
-        oldDirection = Direction;
-        if(clockwise)
-            Direction = (Direction.Equals(spawnDir.North) ? Direction = spawnDir.East : Direction+1);
-        else
-            Direction = (Direction.Equals(spawnDir.East) ? Direction = spawnDir.North : Direction-1);
         isRotating = true;
-        rotatingClockwise = clockwise;
+        carSpawnManager.rotateSpawn(rotatingClockwise, Direction);
+        //speed /= Mathf.Sqrt(2);
     }
 }

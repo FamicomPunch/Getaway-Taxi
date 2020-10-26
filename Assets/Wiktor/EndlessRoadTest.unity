@@ -821,14 +821,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2c406507e79f439c51b72cd47fe42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 14
-  defaultSpeed: 14
+  speed: 5
+  defaultSpeed: 5
   tileAmnt: 5
   dirVectors:
   - {x: -1, y: 0, z: 0}
   - {x: 0, y: -1, z: 0}
   - {x: 1, y: 0, z: 0}
   - {x: 0, y: 1, z: 0}
+  tempAddValue: {x: 0, y: 0, z: 0}
   Direction: 0
   moveDir: 0
   nextDirection: 0

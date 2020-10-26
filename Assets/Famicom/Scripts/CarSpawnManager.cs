@@ -35,8 +35,7 @@ public class CarSpawnManager : MonoBehaviour
         else
             policeSpawn = false;
 
-        if (gameManager.isRotating)
-            rotateSpawn(gameManager.rotatingClockwise);
+        Direction = gameManager.moveDir;
     }
 
     int facingDirection() //Not used yet
@@ -44,11 +43,13 @@ public class CarSpawnManager : MonoBehaviour
         return (int)Direction;
     }
 
-    public void rotateSpawn(bool clockwise) //Rotating the map clockwise?
+    public void rotateSpawn(bool clockwise, GameManager.spawnDir dir) //Rotating the map clockwise?
     {
+        Debug.Log(dir);
+        Debug.Break();
         for (int i = 0; i < highwayLanes; i++)
         {
-            spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise,(int)Direction);
+            spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise, i, dir);
         }
     }
 }

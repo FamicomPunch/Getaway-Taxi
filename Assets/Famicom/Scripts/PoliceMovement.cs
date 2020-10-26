@@ -31,6 +31,7 @@ public class PoliceMovement : CarMovement
     // Update is called once per frame
     void Update()
     {
+        Direction = manager.moveDir;
         gameObject.transform.position += movement(Direction) + moveToPlayer(player) * Time.deltaTime + tempAddSpeed;
         lightList[0].intensity += Time.deltaTime * (leftLight ? lightIntensity * lightSwap : lightIntensity * -lightSwap);
         if (lightList[0].intensity >= lightIntensity)
