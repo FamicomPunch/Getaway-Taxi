@@ -18,12 +18,14 @@ public class UIManager : MonoBehaviour
     public Sprite upArrow;
     public Sprite leftArrow;
     public Sprite rightArrow;
+    public GameObject deadPanel;
     private GameManager manager;
     private float timer;
     private int displayTime;
     private float score;
     private float bonus;
     private int turns;
+    private bool died = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class UIManager : MonoBehaviour
         turnTxt.text = "0";
         scoreTxt.text = "0";
         bonusTxt.text = "0";
+        //deadPanel.setActive(false);
 
     }
 
@@ -71,7 +74,12 @@ public class UIManager : MonoBehaviour
             speedoNeedleImg.rotation = Quaternion.Euler(0f,0f,finalAngle);
         }
         else{
+            //deadPanel.setActive(true);
             speedoNeedleImg.rotation = Quaternion.Euler(0f,0f,90f);
+            if(!died){
+                //died;
+                //ScoringManager.Ins
+            }
         }
 
     }

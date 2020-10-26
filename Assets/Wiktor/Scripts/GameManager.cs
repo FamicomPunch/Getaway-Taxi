@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
 
     public void rampCentered(Vector3 shift)
     {
+        if(backToNormalEvent != null) backToNormalEvent.Invoke();
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Vehicle");
         GameObject[] road = GameObject.FindGameObjectsWithTag("Road");
         tempAddValue = Vector3.zero;
@@ -132,20 +133,22 @@ public class GameManager : MonoBehaviour
         }
         hasShift = true;
         moveDir = nextDirection;
-        if(backToNormalEvent != null) backToNormalEvent.Invoke();
         //Debug.Break();
     }
 
     public void getOffRamp()
     {
+        if(turnSucceed != null) turnSucceed.Invoke();
+        if(backToNormalEvent != null) backToNormalEvent.Invoke();
         Direction = nextDirection;
         moveDir = Direction;
         onRamp = hasShift = false;
         spawnCars = true;
         isRotating = true;
-        carSpawnManager.rotateSpawn(rotatingClockwise, Direction);
+        if(carSpawnManager != null) {
+            carSpawnManager.rotateSpawn(rotatingClockwise, Direction);
+        }
         //speed /= Mathf.Sqrt(2);
-        if(turnSucceed != null) turnSucceed.Invoke();
     }
 
     public void GameOverActive()
