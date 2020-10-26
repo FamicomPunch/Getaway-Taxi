@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    public UnityEvent rightTurnEvent;
+    public UnityEvent leftTurnEvent;
     private TileManager tileManager;
     private CarSpawnManager carSpawnManager;
 
@@ -28,6 +32,9 @@ public class GameManager : MonoBehaviour
         //speed = speed / 4;
         tilesUntilTurn = 5;
         Direction = spawnDir.East;
+        if(rightTurnEvent == null) rightTurnEvent = new UnityEvent();
+        if(leftTurnEvent == null) leftTurnEvent = new UnityEvent();
+
     }
 
     // Update is called once per frame
@@ -44,19 +51,23 @@ public class GameManager : MonoBehaviour
             bool nextTurn = Random.value > 0.5f ? false : true; //Right or Left
             if (nextTurn)
             {
+                // Right Turn
                 if (Direction.Equals(spawnDir.North))
                     nextDirection = spawnDir.East;
                 else nextDirection = Direction + 1;
                 tileManager.SpawnTurnTile(Direction, false);
                 rotatingClockwise = true;
+                if(rightTurnEvent != null) rightTurnEvent.Invoke();
             }
             else
             {
+                // Left Turn
                 if (Direction.Equals(spawnDir.East))
                     nextDirection = spawnDir.North;
                 else nextDirection = Direction - 1;
                 tileManager.SpawnTurnTile(Direction, true);
                 rotatingClockwise = false;
+                if(leftTurnEvent != null) leftTurnEvent.Invoke();
             }
             Debug.Log("NextDir: "+nextDirection);
             //Debug.Break();
