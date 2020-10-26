@@ -104,6 +104,8 @@ public class UIManager : MonoBehaviour
     void PlusOneTurn(){
         turns++;
         turnTxt.text = turns.ToString("0");
+        bonus += 100;
+        bonusTxt.text = bonus.ToString("0");
     }
     public void OnTryAgainBtn(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
