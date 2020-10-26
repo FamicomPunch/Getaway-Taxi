@@ -99,6 +99,6 @@ public class UIManager : MonoBehaviour
         turnTxt.text = turns.ToString("0");
     }
     public void OnTryAgainBtn(){
-        SceneManager.LoadScene("EndlessRoadTest");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
