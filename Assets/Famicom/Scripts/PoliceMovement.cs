@@ -23,8 +23,6 @@ public class PoliceMovement : CarMovement
         lightList[0].intensity = Random.Range(0,5f);
         lightTimer = lightList[0].intensity/lightSwap;
         lightList[1].intensity = 5f - lightList[0].intensity;
-        Debug.Log(lightList[0].intensity);
-        Debug.Log(lightList[1].intensity);
         leftLight = Random.value > 0.5f ? true:false;
         rightLight = !leftLight;
 
@@ -33,7 +31,7 @@ public class PoliceMovement : CarMovement
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position += movement(Direction) + moveToPlayer(player) * Time.deltaTime;
+        gameObject.transform.position += movement(Direction) + moveToPlayer(player) * Time.deltaTime + tempAddSpeed;
         lightList[0].intensity += Time.deltaTime * (leftLight ? lightIntensity * lightSwap : lightIntensity * -lightSwap);
         if (lightList[0].intensity >= lightIntensity)
             leftLight = false;
@@ -55,7 +53,6 @@ public class PoliceMovement : CarMovement
             hunt.y *= 4;
         else
             hunt.x *= 4;
-        Debug.Log(hunt);
         return hunt;
     }
 }

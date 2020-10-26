@@ -857,10 +857,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadPiece:
+  - {fileID: 7680789249658773060, guid: 209a089b8f3cd21418734975b30f4929, type: 3}
   - {fileID: 802940486104333629, guid: f7c5eb88b8150d342a9f7f97a7f0c040, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  exitPiece: []
+  - {fileID: 5401319087848646190, guid: cfd1238066f26c94692f3c2938043bea, type: 3}
   newHighwayTiles: []
 --- !u!1 &1200279308
 GameObject:
@@ -1341,13 +1340,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2c406507e79f439c51b72cd47fe42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  defaultSpeed: 5
-  tileAmnt: 3
+  speed: 14
+  defaultSpeed: 14
+  tileAmnt: 5
   Direction: 0
   nextDirection: 0
   oldDirection: 0
-  tilesUntilTurn: 0
+  tilesUntilTurn: 5
   isRotating: 0
   rotatingClockwise: 0
 --- !u!4 &1708410707

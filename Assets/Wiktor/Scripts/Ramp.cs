@@ -5,13 +5,14 @@ using UnityEngine;
 public class Ramp : MonoBehaviour
 {
     public GameObject vehicleHolder;
-
+    private GameManager gameManager;
     private Animator anim;
-    private GameObject vehicle;
+    private GameObject vehicle = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
     }
 
@@ -20,6 +21,12 @@ public class Ramp : MonoBehaviour
         vehicle.transform.SetParent(null);
         vehicle.GetComponent<PlayerController>().enabled = true;
         vehicle = null;
+        gameManager.getOffRamp();
+    }
+
+    void Update()
+    {
+        
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -32,6 +39,7 @@ public class Ramp : MonoBehaviour
             vehicle.transform.SetParent(vehicleHolder.transform);
             vehicle.transform.position = vehicleHolder.transform.position;
             anim.SetTrigger("OnRamp");
+            gameManager.getOnRamp();
         }
     }
 }

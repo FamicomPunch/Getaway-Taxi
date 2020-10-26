@@ -23,7 +23,7 @@ public class CarSpawnManager : MonoBehaviour
             spawns[i].GetComponent<CarSpawn>().externalTimerSet((i+.5f), (i+1.5f));
             spawns[i].GetComponent<CarSpawn>().manager = gameObject;
         }
-        Direction = GameManager.spawnDir.East;
+        Direction = gameManager.moveDir;
         gameRunning = true;
     }
 

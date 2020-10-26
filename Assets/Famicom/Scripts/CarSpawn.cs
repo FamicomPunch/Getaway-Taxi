@@ -29,6 +29,7 @@ public class CarSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isActive = gameManager.spawnCars;
         if (isActive)
         {
             timeRemaining -= Time.deltaTime;
@@ -45,7 +46,7 @@ public class CarSpawn : MonoBehaviour
                     car = Instantiate(trucks[Random.Range(0, numTrucks)], transform.position + impreciseSpawn, carRotation);
                 else
                     car = Instantiate(cars[Random.Range(0, numCars)], transform.position + impreciseSpawn, carRotation);
-                car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (1+(int)gameManager.Direction)));
+                car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (1+(int)gameManager.moveDir)));
                 //car.GetComponent<CarMovement>().speed = Random.Range(3, 10);
                 timeRemaining = Random.Range(timerMin, timerMax);
             }

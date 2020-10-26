@@ -7,19 +7,21 @@ public class CarMovement : MonoBehaviour
     public float speed;
     protected GameManager manager;
     protected GameManager.spawnDir Direction;
-    
+    public Vector3 tempAddSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        Direction = manager.Direction;
+        Direction = manager.moveDir;
         speed = manager.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position += movement(Direction);
+        Direction = manager.moveDir;
+        gameObject.transform.position += movement(Direction)+tempAddSpeed;
     }
 
     protected Vector3 movement(GameManager.spawnDir Direction)
