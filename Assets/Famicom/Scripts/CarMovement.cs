@@ -20,6 +20,7 @@ public class CarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tempAddSpeed = manager.tempAddValue;
         Direction = manager.moveDir;
         gameObject.transform.position += movement(Direction)+tempAddSpeed;
     }
