@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
 
     public void EndRound()
     {
-        Debug.Break();
+        //Debug.Break();
         // Whatever game over is
     }
 }
