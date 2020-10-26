@@ -165,6 +165,18 @@ public class GameManager : MonoBehaviour
 
     public void EndRound()
     {
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Vehicle");
+        GameObject[] road = GameObject.FindGameObjectsWithTag("Road");
+        foreach (GameObject a in cars)
+        {
+            a.GetComponent<CarMovement>().enabled = false;
+        }
+        foreach (GameObject a in road)
+        {
+            a.GetComponent<RoadMovement>().enabled = false;
+        }
+        speed = 0;
+        carSpawnManager.deleteSpawn();
         //Debug.Break();
         // Whatever game over is
     }
