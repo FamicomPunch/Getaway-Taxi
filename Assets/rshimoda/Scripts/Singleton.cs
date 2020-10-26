@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
  
 /// <summary>
 /// Inherit from this base class to create a singleton.
@@ -6,11 +7,17 @@ using UnityEngine;
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    public UnityEvent ShuttingDownEvent;
+
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static T m_Instance;
  
+    void Start(){
+        if(ShuttingDownEvent == null) ShuttingDownEvent = new UnityEvent();
+    }
+
     /// <summary>
     /// Access singleton instance through this propriety.
     /// </summary>
@@ -25,13 +32,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 return null;
             }
  
-            Debug.Log("Getting Singleton");
             lock (m_Lock)
             {
-                Debug.Log("After Locking");
                 if (m_Instance == null)
                 {
-                    Debug.Log("Creating for the first time");
                     // Search for existing instance.
                     m_Instance = (T)FindObjectOfType(typeof(T));
  
@@ -42,8 +46,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                         var singletonObject = new GameObject();
                         m_Instance = singletonObject.AddComponent<T>();
                         singletonObject.name = typeof(T).ToString() + " (Singleton)";
- 
-                        Debug.Log("Make instance persistent.");
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
@@ -55,14 +57,14 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
  
     private void OnApplicationQuit()
     {
-        Debug.Log("this singleton is going down");
+        if(ShuttingDownEvent != null) ShuttingDownEvent.Invoke();
         m_ShuttingDown = true;
     }
  
  
     private void OnDestroy()
     {
-        Debug.Log("this singleton is going down - da revenge");
+        if(ShuttingDownEvent != null) ShuttingDownEvent.Invoke();
         m_ShuttingDown = true;
     }
 }
