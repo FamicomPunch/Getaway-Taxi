@@ -52,4 +52,10 @@ public class CarSpawnManager : MonoBehaviour
             spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise, i, dir);
         }
     }
+
+    public void deleteSpawn()
+    {
+        foreach (GameObject a in spawns)
+            Destroy(a);
+    }
 }
