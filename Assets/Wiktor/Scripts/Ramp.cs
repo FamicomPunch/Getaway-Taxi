@@ -82,7 +82,7 @@ public class Ramp : MonoBehaviour
     {
         anim.SetTrigger("OnRamp");
         animRunning = true;
-        Debug.Break();
+        //Debug.Break();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
