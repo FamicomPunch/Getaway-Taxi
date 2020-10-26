@@ -33,9 +33,19 @@ public class RoadMovement : MonoBehaviour
             Debug.Log("New dir: "+Dir);
         }
 
-        if (isRampTile && !gameManager.hasShift && Mathf.Abs(pos.x) < moveSpeed * Time.deltaTime && Mathf.Abs(pos.y) < moveSpeed * Time.deltaTime)
+        if (isRampTile && !gameManager.hasShift)
         {
-            gameManager.rampCentered(Vector3.zero - pos);
+            if(Dir.Equals(GameManager.spawnDir.East)||Dir.Equals(GameManager.spawnDir.West))
+            {
+                if (Mathf.Abs(pos.x) < moveSpeed * Time.deltaTime)
+                {
+                    gameManager.rampCentered(Vector3.zero - pos);
+                }
+            }
+            else if(Mathf.Abs(pos.y) < moveSpeed * Time.deltaTime)
+            {
+                gameManager.rampCentered(Vector3.zero - pos);
+            }
             Debug.Log("Old dir: " + Dir);
         }
 
@@ -44,7 +54,7 @@ public class RoadMovement : MonoBehaviour
         {
             case GameManager.spawnDir.East:
                 moveDir = Vector2.left;
-                if (transform.position.x < -18f)
+                if (transform.position.x < -18f && !isRampTile || transform.position.x < -90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
                     gameManager.tileAmnt -= 1;
@@ -53,7 +63,7 @@ public class RoadMovement : MonoBehaviour
                 break;
             case GameManager.spawnDir.North:
                 moveDir = Vector2.down;
-                if (transform.position.y < -18f)
+                if (transform.position.y < -18f && !isRampTile || transform.position.y < -90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
                     gameManager.tileAmnt -= 1;
@@ -62,7 +72,7 @@ public class RoadMovement : MonoBehaviour
                 break;
             case GameManager.spawnDir.South:
                 moveDir = Vector2.up;
-                if (transform.position.y > 18f)
+                if (transform.position.y > 18f && !isRampTile || transform.position.y > 90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
                     gameManager.tileAmnt -= 1;
@@ -71,7 +81,7 @@ public class RoadMovement : MonoBehaviour
                 break;
             case GameManager.spawnDir.West:
                 moveDir = Vector2.right;
-                if (transform.position.x > 18f)
+                if (transform.position.x > 18f && !isRampTile || transform.position.x > 90f)
                 {
                     //tileManager.SpawnTile(gameManager.Direction);
                     gameManager.tileAmnt -= 1;

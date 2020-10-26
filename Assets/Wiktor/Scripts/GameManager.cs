@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
 {
     private TileManager tileManager;
 
-    public float speed = 14;
-    public float defaultSpeed = 14f;
+    public float speed = 5f;
+    public float defaultSpeed = 5f;
     public int tileAmnt = 5;
     public enum spawnDir { East, South, West, North, Rotate };
     public Vector3[] dirVectors = { Vector2.left, Vector2.down, Vector2.right, Vector2.up };
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
                 tileManager.SpawnTurnTile(Direction, true);
             }
             Debug.Log("NextDir: "+nextDirection);
-            Debug.Break();
+            //Debug.Break();
             startTurnIndicator(nextTurn, Direction);
             clearTurn = false;
             Direction = nextDirection;
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void getOnRamp()
     {
+        Debug.Log("NextDirFunc: "+nextDirection+", dirvector: "+ dirVectors[(int)nextDirection]);
         //moveDir = spawnDir.Rotate;
         onRamp = true;
         spawnCars = false;
@@ -83,9 +84,9 @@ public class GameManager : MonoBehaviour
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Vehicle");
         GameObject[] road = GameObject.FindGameObjectsWithTag("Road");
         foreach (GameObject a in cars)
-        { a.GetComponent<CarMovement>().tempAddSpeed = dirVectors[(int)nextDirection] * speed * Time.deltaTime; }
+        { a.GetComponent<CarMovement>().tempAddSpeed = -dirVectors[(int)nextDirection] *speed/10* Time.deltaTime; }
         foreach (GameObject a in road)
-        { a.GetComponent<RoadMovement>().tempAddSpeed = dirVectors[(int)nextDirection] * speed * Time.deltaTime; }
+        { a.GetComponent<RoadMovement>().tempAddSpeed = -dirVectors[(int)nextDirection] * speed/10 * Time.deltaTime; }
     }
 
     public void rampCentered(Vector3 shift)
@@ -93,11 +94,18 @@ public class GameManager : MonoBehaviour
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Vehicle");
         GameObject[] road = GameObject.FindGameObjectsWithTag("Road");
         foreach(GameObject a in cars)
-        { a.transform.position += shift; a.GetComponent<CarMovement>().tempAddSpeed = Vector3.zero; }
+        {
+        //    a.transform.position += shift;
+            a.GetComponent<CarMovement>().tempAddSpeed = Vector3.zero;
+        }
         foreach(GameObject a in road)
-        { a.transform.position += shift; a.GetComponent<RoadMovement>().tempAddSpeed = Vector3.zero; }
+        {
+            //a.transform.position += shift; 
+            a.GetComponent<RoadMovement>().tempAddSpeed = Vector3.zero;
+        }
         hasShift = true;
         moveDir = nextDirection;
+        Debug.Break();
     }
 
     public void getOffRamp()
