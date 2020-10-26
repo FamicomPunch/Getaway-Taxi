@@ -80,7 +80,14 @@ public class UIManager : MonoBehaviour
             if(!died){
                 died = true;
                 deadPanel.SetActive(true);
-                //ScoringManager.Ins
+                ScoringManager.Instance.UpdateScore(
+                    new UserPlay(){
+                        rounds = turns,
+                        score = score,
+                        bonus = bonus,
+                        time = displayTime
+                    }
+                );
             }
         }
 
