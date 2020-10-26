@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public UnityEvent rightTurnEvent;
     public UnityEvent leftTurnEvent;
+    public UnityEvent backToNormalEvent;
     private TileManager tileManager;
     private CarSpawnManager carSpawnManager;
     private GameObject player;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         Direction = spawnDir.East;
         if(rightTurnEvent == null) rightTurnEvent = new UnityEvent();
         if(leftTurnEvent == null) leftTurnEvent = new UnityEvent();
+        if(backToNormalEvent == null)  backToNormalEvent = new UnityEvent();
 
         player = GameObject.Find("Player");
     }
@@ -128,6 +130,7 @@ public class GameManager : MonoBehaviour
         }
         hasShift = true;
         moveDir = nextDirection;
+        if(backToNormalEvent != null) backToNormalEvent.Invoke();
         //Debug.Break();
     }
 
