@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class UIManager : MonoBehaviour
         turnTxt.text = "0";
         scoreTxt.text = "0";
         bonusTxt.text = "0";
-        //deadPanel.setActive(false);
+        deadPanel.SetActive(false);
 
     }
 
@@ -77,7 +78,8 @@ public class UIManager : MonoBehaviour
             //deadPanel.setActive(true);
             speedoNeedleImg.rotation = Quaternion.Euler(0f,0f,90f);
             if(!died){
-                //died;
+                died = true;
+                deadPanel.SetActive(true);
                 //ScoringManager.Ins
             }
         }
@@ -95,5 +97,8 @@ public class UIManager : MonoBehaviour
     void PlusOneTurn(){
         turns++;
         turnTxt.text = turns.ToString("0");
+    }
+    public void OnTryAgainBtn(){
+        SceneManager.LoadScene("EndlessRoadTest");
     }
 }
