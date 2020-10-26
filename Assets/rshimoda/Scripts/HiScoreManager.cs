@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ using UnityEngine.Networking;
 
 public class HiScoreManager : MonoBehaviour
 {
-    //public HiScoreComponent[] components;
+    public HiScoreComponent[] components;
     private string urlBase;
     void Start(){
         urlBase = ScoringManager.Instance.urlBase;
@@ -40,7 +41,19 @@ public class HiScoreManager : MonoBehaviour
             Debug.Log(srvError.error);
         }
         else{
-            var EveryHiScore = JsonUtility.FromJson<HiScores>(returnString);
+            HiScores EveryHiScore = JsonUtility.FromJson<HiScores>(returnString);
+            if(EveryHiScore != null)
+            {
+                var TopTen = EveryHiScore.scores.OrderBy(score => score.top_score).Take(10).ToList<UserData>();
+                for(int countPlayer = 0; countPlayer < TopTen.Count; countPlayer++)
+                {
+                    components[countPlayer+1].DisplayValue(TopTen[countPlayer]);
+                }
+                for(int countEmpty = TopTen.Count; countEmpty < 10; countEmpty++){
+                    components[countEmpty+1].Disable();
+                }
+
+            }
         }
     }
 
