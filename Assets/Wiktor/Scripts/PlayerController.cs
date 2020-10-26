@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        Dir = gm.Direction;
+        Dir = gm.moveDir;
         switch (Dir)
         {
             case GameManager.spawnDir.East:

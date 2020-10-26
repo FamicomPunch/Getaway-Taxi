@@ -9,7 +9,6 @@ public class TileManager : MonoBehaviour
 
     public GameObject[] roadPiece;
     private GameObject lastTile;
-    public GameObject[] exitPiece;
     public GameObject[] newHighwayTiles;
     private Transform playerTransform;
     private float SpawnX = 18f;
@@ -21,7 +20,7 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        lastTile = GameObject.Find("RoadPiece (2)");
+        lastTile = GameObject.Find("RoadPiece (4)");
         famiTileWidth = roadPiece[0].GetComponentInChildren<SpriteRenderer>().bounds.size.x;
 
         newHighwayTiles = new GameObject[5];
@@ -40,28 +39,34 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(lastTile.name);
     }
 
     public void SpawnTile(GameManager.spawnDir spawnDir, int index = -1)
     {
-        Vector2 spawnLoc;
+        if (lastTile.Equals(null))
+        {
+            Debug.Log("Missing Tile!!");
+            Debug.Break();
+        }
+        Debug.Log("Check Tile: "+lastTile.transform.position);
+        Vector3 spawnLoc;
         Vector3 spawnRot = Vector3.zero;
         switch (spawnDir)
         {
             case GameManager.spawnDir.North:
-                spawnLoc = new Vector2(0, famiTileWidth - gameManager.speed * 0.015f);
+                spawnLoc = new Vector3(0, famiTileWidth - gameManager.speed * 0.015f);
                 spawnRot = Vector3.forward * 90f;
                 break;
             case GameManager.spawnDir.South:
-                spawnLoc = new Vector2(0, -famiTileWidth + gameManager.speed * 0.015f);
+                spawnLoc = new Vector3(0, -famiTileWidth + gameManager.speed * 0.015f);
                 spawnRot = Vector3.forward * 90f;
                 break;
             case GameManager.spawnDir.East:
-                spawnLoc = new Vector2(famiTileWidth - gameManager.speed * 0.015f, 0);
+                spawnLoc = new Vector3(famiTileWidth - gameManager.speed * 0.015f, 0);
                 break;
             case GameManager.spawnDir.West:
-                spawnLoc = new Vector2(-famiTileWidth + gameManager.speed * 0.015f, 0);
+                spawnLoc = new Vector3(-famiTileWidth + gameManager.speed * 0.015f, 0);
                 break;
             default:
                 Debug.Log("Broken?");
@@ -72,17 +77,53 @@ public class TileManager : MonoBehaviour
         GameObject road;
         road = Instantiate(roadPiece[0]) as GameObject;
         road.transform.SetParent(transform);
-        road.transform.SetPositionAndRotation(spawnLoc, Quaternion.Euler(spawnRot));
+        
+        road.transform.SetPositionAndRotation(lastTile.transform.position + spawnLoc, Quaternion.Euler(spawnRot));
         //road.transform.position = lastTile.transform.position + new Vector3(famiTileWidth - gameManager.speed * 0.015f,0,0);
         gameManager.tileAmnt += 1;
         lastTile = road;
+        //Debug.Break();
     }
 
-    public void SpawnTurnTile(bool leftTurn)
+    public void SpawnTurnTile(GameManager.spawnDir spawnDir, bool leftTurn)
     {
+        if (lastTile.Equals(null))
+        {
+            Debug.Log("Missing Tile!!");
+            Debug.Break();
+        }
+        Vector3 spawnLoc;// = lastTile.transform.position;
+        //Debug.Log("SpawnLoc"+spawnLoc);
+        Vector3 spawnRot = Vector3.zero;
+        switch (spawnDir)
+        {
+            case GameManager.spawnDir.North:
+                spawnLoc = new Vector3(0, 3 * famiTileWidth - gameManager.speed * 0.015f); ;
+                spawnRot = Vector3.forward * 90f * (leftTurn?1:-1);
+                break;
+            case GameManager.spawnDir.South:
+                spawnLoc = new Vector3(0, -3*famiTileWidth + gameManager.speed * 0.015f);
+                spawnRot = -Vector3.forward * 90f*(leftTurn ? 1 : -1);
+                break;
+            case GameManager.spawnDir.East:
+                spawnLoc = new Vector2(3*famiTileWidth - gameManager.speed * 0.015f, 0);
+                break;
+            case GameManager.spawnDir.West:
+                spawnLoc = new Vector3( -3 * famiTileWidth + gameManager.speed * 0.015f,0);
+                spawnRot = Vector3.forward * 180f* (leftTurn ? 1 : -1);
+                break;
+            default:
+                Debug.Log("Broken?");
+                Debug.Break();
+                return;
+        }
         GameObject road;
-        road = Instantiate(leftTurn ? exitPiece[0] : exitPiece[1]) as GameObject; //Left or right exit tile
+        road = Instantiate(leftTurn ? roadPiece[1] : roadPiece[2]) as GameObject; //Left or right exit tile
+        Quaternion a = road.transform.rotation;
         road.transform.SetParent(transform);
-        road.transform.position = lastTile.transform.position;
+        road.transform.SetPositionAndRotation(lastTile.transform.position + spawnLoc, a * Quaternion.Euler(spawnRot));
+        
+        lastTile = road.transform.Find("NewLastTile").gameObject;
+        Debug.Log("Assign tile: "+lastTile.transform.position);
     }
 }

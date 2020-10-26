@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
  
 /// <summary>
 /// Inherit from this base class to create a singleton.
@@ -6,11 +7,17 @@ using UnityEngine;
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    public UnityEvent ShuttingDownEvent;
+
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;
     private static object m_Lock = new object();
     private static T m_Instance;
  
+    void Start(){
+        if(ShuttingDownEvent == null) ShuttingDownEvent = new UnityEvent();
+    }
+
     /// <summary>
     /// Access singleton instance through this propriety.
     /// </summary>
@@ -39,26 +46,25 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                         var singletonObject = new GameObject();
                         m_Instance = singletonObject.AddComponent<T>();
                         singletonObject.name = typeof(T).ToString() + " (Singleton)";
- 
-                        // Make instance persistent.
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
- 
-                return m_Instance;
             }
+            return m_Instance;
         }
     }
  
  
     private void OnApplicationQuit()
     {
+        if(ShuttingDownEvent != null) ShuttingDownEvent.Invoke();
         m_ShuttingDown = true;
     }
  
  
     private void OnDestroy()
     {
+        if(ShuttingDownEvent != null) ShuttingDownEvent.Invoke();
         m_ShuttingDown = true;
     }
 }

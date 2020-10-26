@@ -29,6 +29,7 @@ public class CarSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isActive = gameManager.spawnCars;
         if (isActive)
         {
             timeRemaining -= Time.deltaTime;
@@ -41,12 +42,12 @@ public class CarSpawn : MonoBehaviour
                     car = Instantiate(police[Random.Range(0, numPolice)], transform.position + impreciseSpawn, carRotation);
                     manager.GetComponent<CarSpawnManager>().police = car;
                 }
-                else if(Random.value >= 0.75f)
+                else if(Random.value >= 0.60f)
                     car = Instantiate(trucks[Random.Range(0, numTrucks)], transform.position + impreciseSpawn, carRotation);
                 else
                     car = Instantiate(cars[Random.Range(0, numCars)], transform.position + impreciseSpawn, carRotation);
-                car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (1+(int)gameManager.Direction)));
-                car.GetComponent<CarMovement>().speed = Random.Range(3, 10);
+                car.transform.Rotate(new Vector3(0, 0, 180 - 90 * (1+(int)gameManager.moveDir)));
+                //car.GetComponent<CarMovement>().speed = Random.Range(3, 10);
                 timeRemaining = Random.Range(timerMin, timerMax);
             }
         }
@@ -56,9 +57,30 @@ public class CarSpawn : MonoBehaviour
         }
     }
 
-    public void rotationSystem(bool clockwise, int Dir)
+    public void rotationSystem(bool clockwise, int slot, GameManager.spawnDir dir)
     {
-        transform.RotateAround(manager.transform.position, Vector3.forward, 90 * (clockwise ? -1:1));
+        transform.Rotate(Vector3.forward, 90 * (clockwise ? -1:1));
+        Vector3 pos;
+        switch (dir)
+        {
+            case GameManager.spawnDir.North:
+                pos = new Vector3(slot * 0.85f - 2.15f, 10, 0);
+                break;
+            case GameManager.spawnDir.South:
+                pos = new Vector3(2.15f - slot * .85f, -10, 0);
+                break;
+            case GameManager.spawnDir.East:
+                pos = new Vector3(10, slot * 0.85f - 2.15f, 0);
+                break;
+            case GameManager.spawnDir.West:
+                pos = new Vector3(-10, 2.15f - slot * 0.85f, 0);
+                break;
+            default:
+                Debug.Log("Broken?");
+                Debug.Break();
+                return;
+        }
+        transform.position = pos;
     }
 
     public void externalTimerSet(float min, float max)

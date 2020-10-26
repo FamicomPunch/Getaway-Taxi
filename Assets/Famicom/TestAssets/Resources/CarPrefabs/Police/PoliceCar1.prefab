@@ -43,13 +43,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 5
-  m_Range: 1
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Intensity: 1
+  m_Range: 15
+  m_SpotAngle: 179
+  m_InnerSpotAngle: 7.8
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8144413019156665575}
   m_Layer: 0
   m_Name: PoliceCar1
-  m_TagString: Untagged
+  m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4d5966e2dd94dc041b59351d0ab43f68, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -165,7 +165,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dd24b832e786cc742b5c0d6db4ed8c1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -215,9 +215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef382215a0d671c469a54054660fb9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Direction: 0
   speed: 0
   player: {fileID: 4482679064057553052, guid: 4c96765756bba1b44806292b9d189e82, type: 3}
+  test: 0
+  lightSwap: 10
+  lightIntensity: 8
 --- !u!1 &5611608350635252443
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,12 +264,12 @@ Light:
   m_Shape: 0
   m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_Intensity: 0
-  m_Range: 1
-  m_SpotAngle: 30
+  m_Range: 10
+  m_SpotAngle: 179
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

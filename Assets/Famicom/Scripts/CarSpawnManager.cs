@@ -19,11 +19,11 @@ public class CarSpawnManager : MonoBehaviour
         spawns = new GameObject[highwayLanes];
         for (int i = 0; i < highwayLanes; i++)
         {
-            spawns[i] = Instantiate(spawner, new Vector3(10,-2.5f + i, 0), Quaternion.LookRotation(Vector3.left, Vector3.back));
-            spawns[i].GetComponent<CarSpawn>().externalTimerSet(((float)i + 0.5f), ((float)i + 1.5f));
+            spawns[i] = Instantiate(spawner, new Vector3(10,i*0.85f-2.15f, 0), Quaternion.LookRotation(Vector3.left, Vector3.back));
+            spawns[i].GetComponent<CarSpawn>().externalTimerSet((i+.5f), (i+1.5f));
             spawns[i].GetComponent<CarSpawn>().manager = gameObject;
         }
-        Direction = GameManager.spawnDir.East;
+        Direction = gameManager.moveDir;
         gameRunning = true;
     }
 
@@ -35,8 +35,7 @@ public class CarSpawnManager : MonoBehaviour
         else
             policeSpawn = false;
 
-        if (gameManager.isRotating)
-            rotateSpawn(gameManager.rotatingClockwise);
+        Direction = gameManager.moveDir;
     }
 
     int facingDirection() //Not used yet
@@ -44,11 +43,13 @@ public class CarSpawnManager : MonoBehaviour
         return (int)Direction;
     }
 
-    public void rotateSpawn(bool clockwise) //Rotating the map clockwise?
+    public void rotateSpawn(bool clockwise, GameManager.spawnDir dir) //Rotating the map clockwise?
     {
+        Debug.Log(dir);
+        Debug.Break();
         for (int i = 0; i < highwayLanes; i++)
         {
-            spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise,(int)Direction);
+            spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise, i, dir);
         }
     }
 }
