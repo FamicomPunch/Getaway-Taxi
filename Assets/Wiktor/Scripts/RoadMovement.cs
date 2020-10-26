@@ -27,6 +27,7 @@ public class RoadMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tempAddSpeed = gameManager.tempAddValue;
         Dir = gameManager.moveDir;
         pos = gameObject.transform.position;
         if (isRampTile && gameManager.hasShift)
