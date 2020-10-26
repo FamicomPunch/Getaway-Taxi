@@ -86,7 +86,6 @@ public class TileManager : MonoBehaviour
         //road.transform.position = lastTile.transform.position + new Vector3(famiTileWidth - gameManager.speed * 0.015f,0,0);
         gameManager.tileAmnt += 1;
         lastTile = road;
-        //Debug.Break();
     }
 
     public void SpawnTurnTile(GameManager.spawnDir spawnDir, bool leftTurn)

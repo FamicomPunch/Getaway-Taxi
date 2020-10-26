@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoadMovement : MonoBehaviour
 {
     private GameManager gameManager;
-    GameManager.spawnDir Dir;
+    GameManager.spawnDir Dir, originalDir;
     private TileManager tileManager;
     public float moveSpeed;
     private bool isRampTile;
@@ -22,6 +22,7 @@ public class RoadMovement : MonoBehaviour
         pos = gameObject.transform.position;
         moveSpeed = gameManager.speed;
         tempAddSpeed = gameManager.tempAddValue;
+        originalDir = gameManager.moveDir;
     }
 
     // Update is called once per frame
@@ -38,16 +39,18 @@ public class RoadMovement : MonoBehaviour
 
         if (isRampTile && !gameManager.hasShift && !gameManager.gameOverTrigger)
         {
-            if(Dir.Equals(GameManager.spawnDir.East)||Dir.Equals(GameManager.spawnDir.West))
+            if(originalDir.Equals(GameManager.spawnDir.East)|| originalDir.Equals(GameManager.spawnDir.West))
             {
+                //Debug.Log("Yay");
                 if (Mathf.Abs(pos.x) < moveSpeed * Time.deltaTime)
                 {
-                    gameManager.rampCentered(Vector3.zero - pos);
+                    //Debug.Break();
+                    gameManager.rampCentered(new Vector3(pos.x,0,0));
                 }
             }
             else if(Mathf.Abs(pos.y) < moveSpeed * Time.deltaTime)
             {
-                gameManager.rampCentered(Vector3.zero - pos);
+                gameManager.rampCentered(new Vector3(0, pos.y, 0));
             }
             //Debug.Log("Old dir: " + Dir);
         }

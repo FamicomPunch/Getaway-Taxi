@@ -64,16 +64,16 @@ public class CarSpawn : MonoBehaviour
         switch (dir)
         {
             case GameManager.spawnDir.North:
-                pos = new Vector3(slot * 0.85f - 2.15f, 10, 0);
+                pos = new Vector3(slot * 0.85f - 2.15f, 12, 0);
                 break;
             case GameManager.spawnDir.South:
-                pos = new Vector3(2.15f - slot * .85f, -10, 0);
+                pos = new Vector3(2.15f - slot * .85f, -12, 0);
                 break;
             case GameManager.spawnDir.East:
-                pos = new Vector3(10, slot * 0.85f - 2.15f, 0);
+                pos = new Vector3(12, slot * 0.85f - 2.15f, 0);
                 break;
             case GameManager.spawnDir.West:
-                pos = new Vector3(-10, 2.15f - slot * 0.85f, 0);
+                pos = new Vector3(-12, 2.15f - slot * 0.85f, 0);
                 break;
             default:
                 Debug.Log("Broken?");

@@ -70,8 +70,6 @@ public class PlayerController : MonoBehaviour
 
     private void forceRotation(int Rotation)
     {
-        Quaternion q = new Quaternion();
-        //q.SetFromToRotation(transform.rotation.eulerAngles, Vector3.left * Rotation);
         transform.rotation = Quaternion.Euler(Vector3.forward * Rotation);
         //transform.Rotate(Vector3.back, Rotation);
     }
@@ -85,7 +83,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (gm.gameOverTrigger)
-        { rb.MovePosition(rb.position + gm.dirVectors[(int)gm.moveDir] * gm.speed * Time.fixedDeltaTime * 4); }
+        {
+            rb.MovePosition(rb.position + gm.dirVectors[(int)gm.moveDir] * gm.speed * Time.fixedDeltaTime * 4 * ((int)gm.moveDir % 2 == 0 ? 1 : -1));
+        }
         else
             rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
