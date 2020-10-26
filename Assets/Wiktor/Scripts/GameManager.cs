@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent rightTurnEvent;
     public UnityEvent leftTurnEvent;
     public UnityEvent backToNormalEvent;
+    public UnityEvent turnSucceed;
     private TileManager tileManager;
     private CarSpawnManager carSpawnManager;
     private GameObject player;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         if(rightTurnEvent == null) rightTurnEvent = new UnityEvent();
         if(leftTurnEvent == null) leftTurnEvent = new UnityEvent();
         if(backToNormalEvent == null)  backToNormalEvent = new UnityEvent();
+        if(turnSucceed == null)  turnSucceed = new UnityEvent();
 
         player = GameObject.Find("Player");
     }
@@ -143,6 +145,7 @@ public class GameManager : MonoBehaviour
         isRotating = true;
         carSpawnManager.rotateSpawn(rotatingClockwise, Direction);
         //speed /= Mathf.Sqrt(2);
+        if(turnSucceed != null) turnSucceed.Invoke();
     }
 
     public void GameOverActive()

@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 270298469}
   - component: {fileID: 270298468}
   - component: {fileID: 270298467}
+  - component: {fileID: 270298470}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -720,6 +721,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270298470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270298466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d18cfa67a379941a268a719cf710a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRange: -0.000001
+  maxRange: 0.000001
+  onShoulder: 0
 --- !u!1 &392924866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,6 +1692,11 @@ PrefabInstance:
       propertyPath: highwayLanes
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7270277162351851761, guid: 4c96765756bba1b44806292b9d189e82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c96765756bba1b44806292b9d189e82, type: 3}
 --- !u!1 &1708410705
@@ -1711,6 +1732,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   leftTurnEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  backToNormalEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  turnSucceed:
     m_PersistentCalls:
       m_Calls: []
   speed: 5
@@ -1889,7 +1916,7 @@ PrefabInstance:
     - target: {fileID: 5178269243292990734, guid: 72a39462b1b2aba4f883daba798e40e1,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5178269243292990965, guid: 72a39462b1b2aba4f883daba798e40e1,
         type: 3}

@@ -17,6 +17,11 @@ public class UIManager : MonoBehaviour
     public Sprite leftArrow;
     public Sprite rightArrow;
     private GameManager manager;
+    private float timer;
+    private int displayTime;
+    private float score;
+    private float bonus;
+    private int turns;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +30,27 @@ public class UIManager : MonoBehaviour
         if(manager.rightTurnEvent != null) manager.rightTurnEvent.AddListener(ChangeImageRight);
         if(manager.leftTurnEvent != null) manager.leftTurnEvent.AddListener(ChangeImageLeft);
         if(manager.backToNormalEvent!= null) manager.backToNormalEvent.AddListener(ChangeImageUp);
+        if(manager.turnSucceed != null) manager.turnSucceed.AddListener(PlusOneTurn);
+        timer = 0;
+        score = 0;
+        bonus = 0;
+        turns = 0;
+        displayTime = 0;
+        turnTxt.text = turns.ToString("0");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if(timer > 1.0f){
+            displayTime++;
+            string minutes = Mathf.Floor(displayTime/60).ToString("00");
+            string seconds = (displayTime%60).ToString("00");
+            timerTxt.text = minutes + "." + seconds;
+            timer = timer - 1;
+        }
+
     }
     void ChangeImageLeft(){
         directionImg.sprite = leftArrow;
@@ -40,5 +60,9 @@ public class UIManager : MonoBehaviour
     }
     void ChangeImageUp(){
         directionImg.sprite = upArrow;
+    }
+    void PlusOneTurn(){
+        turns++;
+        turnTxt.text = turns.ToString("0");
     }
 }

@@ -18,6 +18,7 @@ public class Ramp : MonoBehaviour
 
     public void EndRamp()
     {
+        Debug.Log("EndRampForCar");
         vehicle.transform.SetParent(null);
         vehicle.GetComponent<PlayerController>().enabled = true;
         vehicle = null;
