@@ -46,10 +46,12 @@ public class CarSpawnManager : MonoBehaviour
     public void rotateSpawn(bool clockwise, GameManager.spawnDir dir) //Rotating the map clockwise?
     {
         Debug.Log(dir);
-        Debug.Break();
+        //Debug.Break();
         for (int i = 0; i < highwayLanes; i++)
         {
-            spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise, i, dir);
+            if(spawns != null && i< spawns.Length){
+                spawns[i].GetComponent<CarSpawn>().rotationSystem(clockwise, i, dir);
+            }
         }
     }
 }
